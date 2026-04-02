@@ -3,93 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guida Installazione - ZenTime Architect</title>
+    <title>Guida Completa - Planner Locale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.321.0/font/lucide.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
         code { background-color: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.9em; }
-        pre { background-color: #1e293b; color: #f8fafc; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 1rem 0; }
+        pre { background-color: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 1rem 0; }
         pre code { background-color: transparent; color: inherit; padding: 0; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 leading-relaxed">
-    <div class="max-w-3xl mx-auto px-6 py-12">
+    <div class="max-w-4xl mx-auto px-6 py-12">
         <header class="mb-12 text-center">
             <div class="inline-block bg-blue-600 p-3 rounded-2xl shadow-xl shadow-blue-200 mb-6">
                 <i class="lucide-calendar text-white text-3xl"></i>
             </div>
-            <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 mb-2">ZenTime <span class="text-blue-600">Architect</span></h1>
-            <p class="text-lg text-slate-500 font-medium">Guida all'Installazione Locale</p>
+            <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 mb-2">Planner <span class="text-blue-600">Locale</span></h1>
+            <p class="text-lg text-slate-500 font-medium">Guida completa per uso personale su PC</p>
         </header>
 
         <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-10 space-y-10">
-            
             <section>
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                    <i class="lucide-rocket text-blue-500"></i> Requisiti Preliminari
-                </h2>
-                <p class="mb-4">Prima di iniziare, assicurati di avere installato sul tuo PC:</p>
-                <ul class="list-disc list-inside space-y-2 text-slate-600 ml-4">
-                    <li><strong>Node.js</strong> (Versione 18 o superiore): Scaricalo da <a href="https://nodejs.org/" class="text-blue-600 hover:underline" target="_blank">nodejs.org</a>. Scegli la versione <strong>LTS</strong>.</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                    <i class="lucide-folder-open text-blue-500"></i> Installazione su Windows
-                </h2>
-                <ol class="list-decimal list-inside space-y-4 text-slate-600 ml-4">
-                    <li><strong>Scarica il codice</strong>: Esporta il progetto come ZIP da AI Studio o clona il repository.</li>
-                    <li><strong>Prepara la cartella</strong>: Estrai i file nella cartella desiderata (es. <code>Documenti/Planner</code>).</li>
-                    <li><strong>Apri il Terminale</strong>:
-                        <ul class="list-disc list-inside mt-2 ml-6 space-y-1">
-                            <li>Vai nella cartella del progetto.</li>
-                            <li>Fai <code>Shift + Click destro</code> in uno spazio vuoto della cartella e seleziona <strong>"Apri finestra PowerShell qui"</strong> o "Apri nel terminale".</li>
-                        </ul>
-                    </li>
-                    <li><strong>Installa le dipendenze</strong> (necessario solo la prima volta):
-                        <pre><code>npm install</code></pre>
-                    </li>
-                </ol>
-            </section>
-
-            <section>
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                    <i class="lucide-play text-blue-500"></i> Avvio dell'Applicazione
-                </h2>
-                <p class="mb-4">Per avviare il planner, esegui il seguente comando nel terminale:</p>
-                <pre><code>npm run dev</code></pre>
-                <p class="mt-4">L'applicazione sarà accessibile nel tuo browser all'indirizzo:</p>
-                <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
-                    <a href="http://localhost:3000" class="text-xl font-bold text-blue-700 hover:underline" target="_blank">http://localhost:3000</a>
-                </div>
-                <div class="mt-4 p-4 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-800">
-                    <strong>Nota sulla Porta</strong>: Se desideri usare la porta <strong>3400</strong>, apri il file <code>server.ts</code> con un editor di testo e cambia la riga <code>const PORT = 3000;</code> con <code>const PORT = 3400;</code>.
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">1. Cos'e Planner Locale</h2>
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2 text-sm text-slate-600">
+                    <p>Planner Locale e un'app personale per organizzare settimane, attivita e blocchi orari.</p>
+                    <p>E pensata per una sola persona sul proprio computer.</p>
+                    <p><strong>Non ha login</strong>, <strong>non ha account</strong> e <strong>non ha multiutente</strong>.</p>
+                    <p>Tutto viene salvato localmente nel file <code>data.json</code>.</p>
                 </div>
             </section>
 
             <section>
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                    <i class="lucide-database text-blue-500"></i> Gestione dei Dati
-                </h2>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">2. Installazione</h2>
+                <p class="mb-3 text-slate-600">Serve solo Node.js 18 o superiore.</p>
+                <pre><code>npm install</code></pre>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">3. Avvio e arresto</h2>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                        <h3 class="font-bold mb-2">Database Locale</h3>
-                        <p class="text-sm text-slate-600">I tuoi dati sono salvati nel file <code>data.json</code> nella cartella principale dell'app.</p>
+                        <h3 class="font-bold mb-2">Avvio rapido</h3>
+                        <p class="text-sm text-slate-600">Doppio click su <code>start-planner.bat</code>. Si apre il browser su <code>http://localhost:3000</code>.</p>
                     </div>
                     <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                        <h3 class="font-bold mb-2">Backup & Portabilità</h3>
-                        <p class="text-sm text-slate-600">Copia il file <code>data.json</code> per i backup o l'intera cartella per spostare l'app su un altro PC.</p>
+                        <h3 class="font-bold mb-2">Arresto rapido</h3>
+                        <p class="text-sm text-slate-600">Doppio click su <code>stop-planner.bat</code> oppure pulsante <strong>Ferma applicazione</strong> in alto a destra.</p>
+                    </div>
+                </div>
+                <p class="mt-4 mb-2 text-slate-600">Avvio manuale:</p>
+                <pre><code>npm run dev</code></pre>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">4. Struttura generale dell'app</h2>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Calendario</h3>
+                        <p>Vista settimanale con blocchi orari, giorni selezionabili e pianificazione per trascinamento o click.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Attivita</h3>
+                        <p>Catalogo unico dei task da cui nascono Big Rocks e MIT.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Metriche</h3>
+                        <p>Distribuzione del tempo e carico per dominio.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Configurazione</h3>
+                        <p>Turni, durate, categorie, domini, weekend, ferie e slot protetti.</p>
                     </div>
                 </div>
             </section>
 
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">5. Catalogo attivita</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p>La tab <strong>Attivita</strong> contiene la lista completa dei task.</p>
+                    <p>Ogni task ha titolo, checkbox, priorita, categoria, dominio e durata stimata.</p>
+                    <p>La lista e <strong>compatta e apribile a toggle</strong>:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>in vista compatta vedi titolo, checkbox e azioni rapide</li>
+                        <li>con il toggle espandi la riga e modifichi i dettagli</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">6. Big Rocks settimanali</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p>I Big Rocks si scelgono dalla lista attivita e valgono solo per la settimana visualizzata.</p>
+                    <p>Quando aggiungi un task ai Big Rocks:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>compare nella sidebar</li>
+                        <li>puoi marcarlo fatto con checkbox</li>
+                        <li>puoi trascinarlo nel calendario</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">7. MIT settimanali e MIT del giorno</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p>I MIT funzionano in due passaggi:</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-1">
+                        <li>aggiungi un task al <strong>MIT pool</strong> della settimana</li>
+                        <li>assegnalo al giorno selezionato</li>
+                    </ol>
+                    <p>I MIT del giorno compaiono nella sidebar e si possono trascinare nel calendario.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">8. Calendario e pianificazione</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm text-slate-600">
+                        <h3 class="font-bold mb-2">Creazione blocchi</h3>
+                        <p>Puoi cliccare uno slot libero o trascinare un task, un Big Rock o un MIT nel calendario.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm text-slate-600">
+                        <h3 class="font-bold mb-2">Modifica blocchi</h3>
+                        <p>Puoi spostare i blocchi gia pianificati e cambiarne la durata a passi di 15 minuti.</p>
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-blue-50 rounded-2xl border border-blue-100 text-sm text-blue-800">
+                    Il modale di pianificazione permette di scegliere titolo, orario di inizio, durata, categoria e dominio.
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">9. Regole automatiche</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p>L'app impedisce automaticamente:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>sovrapposizione tra blocchi</li>
+                        <li>pianificazione fuori turno</li>
+                        <li>uso di giorni festivi o non lavorativi</li>
+                        <li>uso di slot email o buffer protetti</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">10. Stati e colori</h2>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 text-slate-700">
+                        <h3 class="font-bold mb-2">Grigio</h3>
+                        <p>Task non pianificato nella settimana corrente.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl border border-blue-200 bg-blue-50 text-blue-800">
+                        <h3 class="font-bold mb-2">Blu</h3>
+                        <p>Task pianificato nella settimana corrente.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl border border-emerald-200 bg-emerald-50 text-emerald-800">
+                        <h3 class="font-bold mb-2">Verde</h3>
+                        <p>Task segnato come fatto con la checkbox.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">11. Saturazione</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p>La sidebar mostra il carico giornaliero rispetto alla capacita del turno.</p>
+                    <p>Serve per capire se la giornata e troppo piena o se hai ancora margine.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">12. Configurazione</h2>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Turni e giorni</h3>
+                        <p>Puoi definire orari di lavoro, giorni attivi, sabato e domenica visibili, ferie e chiusure.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Blocchi protetti</h3>
+                        <p>Puoi configurare finestre email e buffer per impedirne l'uso nella pianificazione.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Durate</h3>
+                        <p>Puoi impostare le durate predefinite mostrate nel modale di pianificazione.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Categorie e domini</h3>
+                        <p>Puoi adattare tassonomia e ambiti di lavoro al tuo metodo personale.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">13. Metriche ed emergenze</h2>
+                <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Metriche</h3>
+                        <p>Mostrano distribuzione del tempo, carico per dominio e buffer residuo.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Emergenze</h3>
+                        <p>Servono per registrare imprevisti giornalieri e capire se la saturazione era troppo alta.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">14. Dati, backup e portabilita</h2>
+                <div class="space-y-3 text-sm text-slate-600">
+                    <p>Tutto e salvato in <code>data.json</code>.</p>
+                    <p>Puoi fare backup in tre modi:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>esporta dall'interfaccia</li>
+                        <li>importa un backup dall'interfaccia</li>
+                        <li>copia manualmente il file <code>data.json</code></li>
+                    </ul>
+                </div>
+            </section>
         </div>
 
         <footer class="mt-12 text-center text-slate-400 text-sm">
-            <p>&copy; 2026 ZenTime Architect - Pianificazione Strategica Professionale.</p>
+            <p>&copy; 2026 Planner Locale - planner personale locale senza login.</p>
         </footer>
     </div>
 </body>
