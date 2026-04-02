@@ -99,35 +99,66 @@ const CATEGORY_ICONS: Record<WorkCategory, React.ReactNode> = {
 export default function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [saturation, setSaturation] = useState(75);
-  const [bigRocks, setBigRocks] = useState<string[]>([
-    'Chiusura Bilancio Rossi Srl',
-    'Analisi Processo Delega Team',
-    'Revisione Procedure Antiriciclaggio'
-  ]);
-  const [dailyMITs, setDailyMITs] = useState<string[]>([
-    'Pianificazione agenda',
-    '',
-    ''
-  ]);
-  const [nextActions, setNextActions] = useState<string[]>([
-    'Inviare F24 Bianchi',
-    'Chiamare Filiale Milano',
-    'Prenotare corso aggiornamento'
-  ]);
-  const [specialties, setSpecialties] = useState<Record<string, string>>({
-    [format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy-MM-dd')]: 'Analisi Bilanci',
-    [format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 1), 'yyyy-MM-dd')]: 'Visita Filiale A',
-    [format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 2), 'yyyy-MM-dd')]: 'Formazione Team',
-    [format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 3), 'yyyy-MM-dd')]: 'Revisione Processi',
-    [format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 4), 'yyyy-MM-dd')]: 'Pianificazione Settimana Prossima'
-  });
-  const [blocks, setBlocks] = useState<TimeBlock[]>([
-    { id: '1', taskId: 'Analisi Bilancio Rossi', day: startOfWeek(new Date(), { weekStartsOn: 1 }), startTime: '09:00', duration: 90, category: 'Big Rock', domain: 'Tecnica' },
-    { id: '2', taskId: 'Meeting Strategico', day: addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 1), startTime: '10:00', duration: 60, category: 'MIT', domain: 'Miglioramento Processo' },
-    { id: '3', taskId: 'Corso Aggiornamento', day: addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 2), startTime: '15:15', duration: 120, category: 'Altro', domain: 'Formazione' }
-  ]);
+  const [bigRocks, setBigRocks] = useState<string[]>([]);
+  const [dailyMITs, setDailyMITs] = useState<string[]>([]);
+  const [nextActions, setNextActions] = useState<string[]>([]);
+  const [specialties, setSpecialties] = useState<Record<string, string>>({});
+  const [blocks, setBlocks] = useState<TimeBlock[]>([]);
   const [emergencyLogs, setEmergencyLogs] = useState<EmergencyEntry[]>([]);
   const [activeTab, setActiveTab] = useState<'calendar' | 'metrics' | 'emergencies'>('calendar');
+
+  // Load data from API on mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await fetch('/api/data');
+        const parsed = await response.json();
+        if (parsed.saturation) setSaturation(parsed.saturation);
+        if (parsed.bigRocks) setBigRocks(parsed.bigRocks);
+        if (parsed.dailyMITs) setDailyMITs(parsed.dailyMITs);
+        if (parsed.nextActions) setNextActions(parsed.nextActions);
+        if (parsed.specialties) setSpecialties(parsed.specialties);
+        if (parsed.emergencyLogs) setEmergencyLogs(parsed.emergencyLogs);
+        if (parsed.blocks) {
+          // Convert string dates back to Date objects
+          const blocksWithDates = parsed.blocks.map((b: any) => ({
+            ...b,
+            day: new Date(b.day)
+          }));
+          setBlocks(blocksWithDates);
+        }
+      } catch (e) {
+        console.error("Error loading data from API", e);
+      }
+    };
+    loadData();
+  }, []);
+
+  // Save data to API whenever it changes (debounced)
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const dataToSave = {
+        saturation,
+        bigRocks,
+        dailyMITs,
+        nextActions,
+        specialties,
+        blocks,
+        emergencyLogs
+      };
+      try {
+        await fetch('/api/data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dataToSave)
+        });
+      } catch (e) {
+        console.error("Error saving data to API", e);
+      }
+    }, 1000); // 1 second debounce
+
+    return () => clearTimeout(timer);
+  }, [saturation, bigRocks, dailyMITs, nextActions, specialties, blocks, emergencyLogs]);
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -470,6 +501,63 @@ export default function App() {
             </span>
             <button onClick={() => setCurrentDate(addDays(currentDate, 7))} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
               <ChevronRight className="w-5 h-5 text-slate-600" />
+            </button>
+          </div>
+
+          <div className="h-8 w-px bg-slate-200" />
+
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={async () => {
+                try {
+                  const response = await fetch('/api/data');
+                  const data = await response.json();
+                  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `zentime-backup-${format(new Date(), 'yyyy-MM-dd')}.json`;
+                  a.click();
+                } catch (e) {
+                  console.error("Error exporting data", e);
+                }
+              }}
+              title="Esporta Backup"
+              className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-blue-600 transition-all"
+            >
+              <Settings2 className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={() => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                  const file = (e.target as HTMLInputElement).files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = async (re) => {
+                      const content = re.target?.result as string;
+                      try {
+                        await fetch('/api/data', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: content
+                        });
+                        window.location.reload();
+                      } catch (e) {
+                        console.error("Error importing data", e);
+                      }
+                    };
+                    reader.readAsText(file);
+                  }
+                };
+                input.click();
+              }}
+              title="Importa Backup"
+              className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-emerald-600 transition-all"
+            >
+              <BookOpen className="w-5 h-5" />
             </button>
           </div>
         </div>

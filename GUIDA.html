@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Installazione - ZenTime Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.321.0/font/lucide.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code { background-color: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.9em; }
+        pre { background-color: #1e293b; color: #f8fafc; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background-color: transparent; color: inherit; padding: 0; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 leading-relaxed">
+    <div class="max-w-3xl mx-auto px-6 py-12">
+        <header class="mb-12 text-center">
+            <div class="inline-block bg-blue-600 p-3 rounded-2xl shadow-xl shadow-blue-200 mb-6">
+                <i class="lucide-calendar text-white text-3xl"></i>
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 mb-2">ZenTime <span class="text-blue-600">Architect</span></h1>
+            <p class="text-lg text-slate-500 font-medium">Guida all'Installazione Locale</p>
+        </header>
+
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-10 space-y-10">
+            
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <i class="lucide-rocket text-blue-500"></i> Requisiti Preliminari
+                </h2>
+                <p class="mb-4">Prima di iniziare, assicurati di avere installato sul tuo PC:</p>
+                <ul class="list-disc list-inside space-y-2 text-slate-600 ml-4">
+                    <li><strong>Node.js</strong> (Versione 18 o superiore): Scaricalo da <a href="https://nodejs.org/" class="text-blue-600 hover:underline" target="_blank">nodejs.org</a>. Scegli la versione <strong>LTS</strong>.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <i class="lucide-folder-open text-blue-500"></i> Installazione su Windows
+                </h2>
+                <ol class="list-decimal list-inside space-y-4 text-slate-600 ml-4">
+                    <li><strong>Scarica il codice</strong>: Esporta il progetto come ZIP da AI Studio o clona il repository.</li>
+                    <li><strong>Prepara la cartella</strong>: Estrai i file nella cartella desiderata (es. <code>Documenti/Planner</code>).</li>
+                    <li><strong>Apri il Terminale</strong>:
+                        <ul class="list-disc list-inside mt-2 ml-6 space-y-1">
+                            <li>Vai nella cartella del progetto.</li>
+                            <li>Fai <code>Shift + Click destro</code> in uno spazio vuoto della cartella e seleziona <strong>"Apri finestra PowerShell qui"</strong> o "Apri nel terminale".</li>
+                        </ul>
+                    </li>
+                    <li><strong>Installa le dipendenze</strong> (necessario solo la prima volta):
+                        <pre><code>npm install</code></pre>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <i class="lucide-play text-blue-500"></i> Avvio dell'Applicazione
+                </h2>
+                <p class="mb-4">Per avviare il planner, esegui il seguente comando nel terminale:</p>
+                <pre><code>npm run dev</code></pre>
+                <p class="mt-4">L'applicazione sarà accessibile nel tuo browser all'indirizzo:</p>
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+                    <a href="http://localhost:3000" class="text-xl font-bold text-blue-700 hover:underline" target="_blank">http://localhost:3000</a>
+                </div>
+                <div class="mt-4 p-4 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-800">
+                    <strong>Nota sulla Porta</strong>: Se desideri usare la porta <strong>3400</strong>, apri il file <code>server.ts</code> con un editor di testo e cambia la riga <code>const PORT = 3000;</code> con <code>const PORT = 3400;</code>.
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                    <i class="lucide-database text-blue-500"></i> Gestione dei Dati
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Database Locale</h3>
+                        <p class="text-sm text-slate-600">I tuoi dati sono salvati nel file <code>data.json</code> nella cartella principale dell'app.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <h3 class="font-bold mb-2">Backup & Portabilità</h3>
+                        <p class="text-sm text-slate-600">Copia il file <code>data.json</code> per i backup o l'intera cartella per spostare l'app su un altro PC.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="mt-12 text-center text-slate-400 text-sm">
+            <p>&copy; 2026 ZenTime Architect - Pianificazione Strategica Professionale.</p>
+        </footer>
+    </div>
+</body>
+</html>
